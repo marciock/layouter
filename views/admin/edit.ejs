@@ -1,0 +1,119 @@
+<%- contentFor('body') %>
+
+<div class="row">
+    
+    <div class="col s6 m6">
+            <h4>Editando Modelo de Layout</h4>
+           
+    <form method="POST" action="/update_admin" id="form" name="form" enctype="multipart/form-data">
+       
+        <div class="file-field input-field col s8">
+            <div class="btn blue">
+                <span>Arquivo</span>
+                <input type="file" id="file-select" name="svg">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path" type="text" id="file-pick"   />
+            </div>
+                
+        </div>
+        <div class="input-field col s8">
+            <input type="text" id="title" name="title" value="<%- layouts.title %>" />
+            <label for="title">Título</label>
+        </div>
+        <div class="input-field col s8">
+                <input type="text" id="category" name="category" value="<%- layouts.category %>" />
+                <label for="title">Categoria</label>
+        </div>
+        <input type="hidden" id="id" name="id" value="<%- layouts._id %>" >
+       
+        <div class="input-field col s8">
+                <button type="submit" class=" btn-floating btn-large waves-effect waves-light green"><i class="material-icons">save</i> </button>
+                <button type="reset" class=" btn-floating btn-large waves-effect waves-light red" ><i class="material-icons">cancel</i></button>
+        </div>
+       
+  
+    </div>
+    <div class="col s6 m6">
+        <h4>Visualização da Imagem</h4>
+        <div style="border: 1px solid gray" id="view-div" class="center-align">
+           <%- layouts.svg %>
+           <style>
+               svg{
+                   width:80%;
+                   height: auto;
+               }
+           </style>
+        </div>
+    </div>
+  
+</form>
+
+</div>
+<div class="row">
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large black tooltipped" data-tooltip="Voltar" data-position="left" href="/admin"><i class="material-icons">arrow_back</i></a>
+    </div>
+  </div>
+<script src="javascripts/fetchcustom.js"></script>
+<script>
+
+const filePick=document.getElementById('file-pick');
+const fileSelect=document.getElementById('file-select');
+const viewDiv=document.getElementById('view-div')
+
+
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const tipp=document.querySelectorAll('.tooltipped');
+    const instancesTipp=M.Tooltip.init(tipp,{});
+})
+
+
+const testSVG=(name)=>{
+    let ext=name.substring(name.lastIndexOf('.')+1);
+    return ext;
+}
+
+filePick.addEventListener('change',()=>{
+    let test=testSVG(filePick.value);
+
+   
+
+    if(test !== 'svg'){
+        alert('Só aceita arquivos SVG');
+
+        filePick.value=null;
+    }
+
+})
+
+fileSelect.addEventListener('change',(e)=>{
+
+    viewDiv.innerHTML='';   
+let filesvg= e.target.files[0];
+
+let url=URL.createObjectURL(filesvg)
+const img=document.createElement('img');
+
+
+    img.classList.add('responsive-img')
+    img.style.width='80%';
+    img.style.height='auto';
+    img.src=url;
+
+viewDiv.classList.add('center-align')
+
+viewDiv.appendChild(img);
+
+
+
+
+   
+})
+
+
+
+
+</script>

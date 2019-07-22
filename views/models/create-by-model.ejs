@@ -1,0 +1,46 @@
+<%- contentFor('body') %>
+
+<div class="row">
+    <h3> Modelo de Layout: <%- layouts.title %> - Categoria: <%- layouts.category %> </h3>
+</div>
+<div class="row">
+
+    <div class="center-align" id="view-svg">
+        <%- layouts.svg %>
+
+    </div>
+    
+
+</div>
+<div>
+    <div class="fixed-action-btn">
+        <button class="btn-floating btn-large black tooltipped " data-position="left" data-tooltip="Menu de Ações">
+          <i class="large material-icons">apps</i>
+        </button>
+        <ul>
+          <li><button class="btn-floating  blue-grey lighten-2 tooltipped " data-position="left" data-tooltip="Resetar"><i class="material-icons">cancel</i></button></li>
+          <li><button class="btn-floating  blue-grey lighten-1 tooltipped " data-position="left" data-tooltip="Salvar"><i class="material-icons">save</i></button></li>
+          <li><a class="btn-floating  blue-grey tooltipped " data-position="left" data-tooltip="Voltar" href="/models"><i class="material-icons">arrow_back</i></a></li>
+        </ul>
+      </div>
+</div>
+<div id="docker">
+
+</div>
+<script>
+    const svg=document.querySelector('svg');
+
+    svg.style="width:700px;height:auto";
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const elemsFloat = document.querySelectorAll('.fixed-action-btn');
+    const instancesFloat = M.FloatingActionButton.init( elemsFloat,{});
+
+    var elemsTipped = document.querySelectorAll('.tooltipped');
+    var instancesTipped = M.Tooltip.init(elemsTipped, {});
+
+  });
+
+</script>

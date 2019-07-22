@@ -1,0 +1,90 @@
+<%- contentFor('body') %>
+<style>
+  
+  svg{
+    width: 100%;  
+    height: auto;
+  }
+  .selection{
+    border: 3px solid red;
+  }
+</style>
+
+<div class="row">
+    <h3>Modelos de Layouts</h3>
+</div>
+<div class="row">
+  <% for(m of models){ %>
+    <div class="col s4 m4">
+        <div class="card">
+          <div class="card-image">
+           <%- m.svg  %>
+          <form action="/create_by_model" method="POST">
+
+            <input type="hidden" id="id" name="id" value="<%- m._id %>" />
+            <button  type="submit" class="  btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></button>
+
+          </form>
+           
+          </div>
+          <div class="card-content">
+              <span class="card-title"><%- m.title %></span>
+            <p>Categoria: <%- m.category %></p>
+          </div>
+        </div>
+      </div>
+    <% } %>
+   
+</div>
+<div>
+    <div class="fixed-action-btn">
+        <button class="btn-floating btn-large black tooltipped " data-position="left" data-tooltip="Filtros e Pesquisa">
+          <i class="large material-icons">apps</i>
+        </button>
+        <ul>
+          <li><button class="btn-floating  blue-grey lighten-2 tooltipped " data-position="left" data-tooltip="Pesquisar"><i class="material-icons">search</i></button></li>
+          <li><button class="btn-floating  blue-grey lighten-1 tooltipped " data-position="left" data-tooltip="Categorias"><i class="material-icons">chrome_reader_mode</i></button></li>
+          <li><button class="btn-floating  blue-grey tooltipped " data-position="left" data-tooltip="Todos"><i class="material-icons">collections</i></button></li>
+        </ul>
+      </div>
+</div>
+
+<script>
+
+  const mytree=document.querySelectorAll('svg');
+  
+
+  mytree.forEach((f)=>{
+    f.addEventListener('click',(e)=>{
+
+    console.log(e.target.id);
+
+    let border= e.target.style.stroke;
+      console.log(border)
+    if(border !=='red'){
+      e.target.style.stroke='red'
+      e.target.textContent="este";
+
+     let teste=f
+
+      console.log(teste);
+
+    }
+    
+  
+  
+})
+
+  })
+ 
+ 
+ 
+     document.addEventListener('DOMContentLoaded', function() {
+    const elemsFloat = document.querySelectorAll('.fixed-action-btn');
+    const instancesFloat = M.FloatingActionButton.init( elemsFloat,{});
+
+    var elemsTipped = document.querySelectorAll('.tooltipped');
+    var instancesTipped = M.Tooltip.init(elemsTipped, {});
+
+  });
+</script>

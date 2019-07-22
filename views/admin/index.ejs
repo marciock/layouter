@@ -1,0 +1,103 @@
+<%- contentFor('body') %>
+<div class="row">
+  <h4>Administração - Modelos de Layouts</h4>
+</div>
+<div class="row">
+    <table>
+        <thead>
+          <tr>
+              <th>Titulo</th>
+              <th>Categoria</th>
+              <th>Imagem</th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <% for(lt of layouts){ %>
+              <tr>
+                <td><div style="font-size: 16pt;font-weight: bold"><%- lt.title %></div></td>
+                <td><div style="font-size: 16pt;font-weight: bold"><%- lt.category %></div></td>
+                <td><button class="btn-flat " style="font-size: 16pt;font-weight: bold" data-view="<%- lt._id %>" ><i class="material-icons">pageview</i></button></td>
+                <td><button class="waves-effect waves-teal btn-flat " data-delete="<%- lt._id %>" ><i class="material-icons">delete</i></button></td>
+                <td><a class="waves-effect waves-teal btn-flat " href="/edit_admin?id=<%- lt._id %>"><i class="material-icons" data-target="modal-message">edit</i></a></td>
+              </tr>
+              <% } %>
+             
+        </tbody>
+      </table>
+
+
+</div>
+<div class="row">
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large black tooltipped" data-tooltip="Adicionar novo Layout" data-position="left" href="/add_admin"><i class="material-icons">add</i></a>
+  </div>
+</div>
+<div id="docker">
+
+</div>
+
+
+
+<script src="javascripts/fetchcustom.js"></script>
+<script>
+ 
+   const dataDelete=document.querySelectorAll('[data-delete]');
+   const dataView=document.querySelectorAll('[data-view]');
+
+ window.onload=()=>{
+
+// TOOLTIPP
+  const tipp=document.querySelectorAll('.tooltipped');
+  const instancesTipp=M.Tooltip.init(tipp,{});
+
+}
+ 
+
+dataView.forEach((f)=>{
+  f.addEventListener('click',()=>{
+
+       
+        let url=`/view_svg?id=${f.dataset.view}`
+        fetchViewSVG(url);
+
+       
+
+
+  })
+})
+
+  dataDelete.forEach((f)=>{
+
+      f.addEventListener('click',()=>{
+       
+        
+        const docker=document.getElementById('docker');
+        const header=`<h4>Exclusão de Registro</h4>`;
+        const content=`<p class="align-center">Tem certeza que deseja excluir ?</p>`
+        const footer=`
+        <button class="waves-effect waves-red btn-flat btn-large" data-close="true">Não</button>
+        <a class="waves-effect waves-red btn-flat btn-large" href="/remove_admin?id=${f.dataset.delete}">Sim</a>
+        `
+        
+
+        createModal(docker,header,content,footer) 
+
+
+
+      })
+   })
+
+
+
+
+
+
+
+
+
+
+
+</script>
