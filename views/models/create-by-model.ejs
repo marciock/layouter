@@ -27,12 +27,18 @@
 <div id="docker">
 
 </div>
+<script src="javascripts/draganddrop.js"></script>
 <script>
     const svg=document.querySelector('svg');
 
     svg.style="width:700px;height:auto";
 
-
+  
+window.onload=()=>{
+  startBarText();
+}
+   
+    
 
     document.addEventListener('DOMContentLoaded', function() {
     const elemsFloat = document.querySelectorAll('.fixed-action-btn');
@@ -40,6 +46,9 @@
 
     var elemsTipped = document.querySelectorAll('.tooltipped');
     var instancesTipped = M.Tooltip.init(elemsTipped, {});
+
+    var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
 
   });
 
