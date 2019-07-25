@@ -33,9 +33,39 @@
 
     svg.style="width:700px;height:auto";
 
+
+  
+
+  
+    svg.addEventListener('click',(e)=>{
+
+     
+    console.log(e.target.textContent);
+
+    let textContent=e.target.textContent;
+    let idText=e.target.id;
+
+    let border= e.target.style.stroke;
+      console.log(border)
+    
+    //  e.target.style.stroke='red'
+     // e.target.textContent="este";
+     startBarText(textContent,idText);
+    // let teste=f
+
+    //  console.log(teste);
+
+    
+    
+  
+  
+})
+
+
+
   
 window.onload=()=>{
-  startBarText();
+  //startBarText();
 }
    
     
@@ -47,8 +77,7 @@ window.onload=()=>{
     var elemsTipped = document.querySelectorAll('.tooltipped');
     var instancesTipped = M.Tooltip.init(elemsTipped, {});
 
-    var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, options);
+   
 
   });
 

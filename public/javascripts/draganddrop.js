@@ -41,47 +41,23 @@ const dragBars=(dragMe)=>{
 
 }
 
-const contentTextBar=()=>{
-    const div=document.createElement('div');
-   
-
-    div.innerHTML +=`
-    <div class="row">
-        <div class="input-field col s6">
-            <input  id="kerning" type="number" class="active">
-            <label for="kerning">Kerning</label>
-        </div>
-        <div class="input-field col s6">
-            <select id="und" >
-            <option value="" disabled selected>und</option>
-            <option value="px">px</option>
-            <option value="pt">pt</option>
-            <option value="%">%</option>
-            <option value="em">em</option>
-            </select>
-            <label>und</label>
-         </div>
-       
-    </div>
-    `;
-    
-
-   
 
 
-    return div;
-}
-
-const startBarText=()=>{
+const startBarText=(textTarget,textId)=>{
     const barText=document.createElement('div');
     const barContent=document.createElement('div');
     const docker=document.getElementById('docker')
     const btnMin=document.createElement('button');
     const btnMax=document.createElement('button');
+    const btnClose=document.createElement('button');
+    let div=document.createElement('div');
+   
+
    
     
     btnMax.classList.add('waves-efect','waves-gray','btn-flat','white-text');
     btnMin.classList.add('waves-efect','waves-gray','btn-flat','white-text');
+    btnClose.classList.add('waves-efect','waves-gray','btn-flat','white-text');
 
 
     barText.classList.add('black','white-text','right-align');
@@ -109,15 +85,34 @@ const startBarText=()=>{
 
    btnMin.innerHTML=`<i class="material-icons">arrow_drop_up</i>`;
    btnMax.innerHTML=`<i class="material-icons">aspect_ratio</i>`;
+   btnClose.innerHTML=`<i class="material-icons">close</i>`;
 
-    barText.innerHTML=`<span id="bar-title-text">teste</scpan>`;
+
+   div.innerHTML =`
+   <div class="row">
+       <div class="input-field col s12">
+           <input  id="text" type="text"  value="${textTarget}">
+           <label for="text" class="active">Text</label>
+       </div>
+       <div class="col s12">
+       <button class="btn-floating  green lighten-2 tooltipped " id="textOK" ><i class="material-icons">check</i></button>
+       </div>
+   </div>
+       
+   `;
+  
+
+
+  
+    barText.innerHTML=`<span id="bar-title-text">${textTarget}</scpan>`;
 
     //const teste=contentTextBar();
-   barContent.appendChild(contentTextBar());
-   console.log(contentTextBar())
+   barContent.appendChild(div);
+  
 
     barText.appendChild(btnMin);
     barText.appendChild(btnMax);
+    barText.appendChild(btnClose);
     barText.appendChild(barContent) 
     dragBars(barText);
 
@@ -128,6 +123,14 @@ const startBarText=()=>{
     })
     btnMax.addEventListener('click',()=>{
         barContent.style.display='block';
+    })
+    btnClose.addEventListener('click',()=>{
+        barText.remove();
+    })
+
+    let textOK=document.getElementById('textOK')
+    textOK.addEventListener('click',()=>{
+        document.getElementById(textId).textContent=document.getElementById('text').value;
     })
 
     //return barText;
